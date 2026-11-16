@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Afterlight </title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="images/favicon 1.jpeg" type="image/x-icon">
+<style>
+/* ========== БАЗА ========== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #DCCFC0;
+  --bg-2: #c6bbad;
+  --text: #635549;
+  --muted: #6a6055;
+  --accent: #664e42;
+  --line: #4d362f;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ========== ШАПКА ========== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(146, 137, 118, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.logo span { color: var(--accent); }
+
+.nav { display: flex; gap: 32px; }
+.nav a {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.nav a:hover { color: var(--text); }
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.burger span {
+  width: 26px; height: 1.5px;
+  background: var(--text);
+  transition: 0.3s;
+}
+
+/* ========== ГЛАВНЫЙ ЭКРАН ========== */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) grayscale(0.3);
+  transform: scale(1.05);
+  animation: zoomOut 12s ease forwards;
+}
+
+@keyframes zoomOut { to { transform: scale(1); } }
+
+.hero__content { position: relative; z-index: 2; padding: 0 20px; }
+
+.hero__subtitle {
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.hero__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(60px, 12vw, 130px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+.btn:hover { background: var(--accent); color: var(--bg); }
+
+.btn--outline {
+  border-color: var(--line);
+  color: var(--text);
+  margin-top: 10px;
+}
+.btn--outline:hover {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -8px); }
+}
+
+/* ========== СЕКЦИИ ========== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 40px;
+}
+
+.section__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(38px, 6vw, 64px);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.section__subtitle {
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 60px;
+}
+
+/* ========== ГАЛЕРЕЯ ========== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--bg-2);
+  cursor: pointer;
+}
+
+.gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease, filter 0.5s ease;
+  filter: grayscale(0.2) brightness(0.9);
+}
+
+.gallery__item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0) brightness(1);
+}
+
+/* ========== О СЕБЕ ========== */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: var(--bg-2);
+  max-width: 100%;
+  padding: 120px 40px;
+}
+.about__img img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  filter: grayscale(0.3);
+}
+.about__text { max-width: 460px; }
+.about__text p { color: var(--muted); margin-bottom: 18px; }
+
+/* ========== КОНТАКТЫ ========== */
+.contacts { text-align: center; }
+
+.contacts__links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.contacts__links a {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 4px;
+  transition: 0.3s;
+}
+.contacts__links a:hover { color: var(--accent); border-color: var(--accent); }
+
+.contacts__phone {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+/* ========== ПОДВАЛ ========== */
+.footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ========== ЛАЙТБОКС ========== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.lightbox.active { display: flex; opacity: 1; }
+
+.lightbox__img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.6;
+  transition: 0.3s;
+  font-family: serif;
+}
+.lightbox__close:hover,
+.lightbox__prev:hover,
+.lightbox__next:hover { opacity: 1; }
+
+.lightbox__close { top: 20px; right: 30px; }
+.lightbox__prev { left: 30px; top: 50%; transform: translateY(-50%); }
+.lightbox__next { right: 30px; top: 50%; transform: translateY(-50%); }
+
+/* ========== АДАПТИВ ========== */
+@media (max-width: 900px) {
+  .about { grid-template-columns: 1fr; gap: 40px; }
+  .about__text { max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 16px 20px; }
+  .nav {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 70%; height: 100vh;
+    background: var(--bg-2);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    transition: right 0.4s ease;
+    border-left: 1px solid var(--line);
+  }
+  .nav.active { right: 0; }
+  .nav a { font-size: 16px; }
+
+  .burger { display: flex; z-index: 101; }
+  .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .burger.active span:nth-child(2) { opacity: 0; }
+  .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .section { padding: 80px 20px; }
+  .about { padding: 80px 20px; }
+
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+  .contacts__links { gap: 24px; }
+  .contacts__phone { font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+  .gallery { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ШАПКА ===== -->
+<header class="header">
+  <a href="#" class="logo">BEST<span>.</span>PHOTOGRAPHERS</a>
+  <nav class="nav" id="nav">
+    <a href="#gallery">Портфолио</a>
+    <a href="#about">О себе</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('https://picsum.photos/id/1015/1920/1080')"></div>
+  <div class="hero__content">
+    <p class="hero__subtitle">Фотограф · Портрет · Свадьбы</p>
+    <h1 
+    class="hero__title">Afterlight<br>Photography & Visual Stories</h1>
+    <a href="#gallery" class="btn">Смотреть работы</a>
+  </div>
+  <div class="hero__scroll">scroll ↓</div>
+</section>
+
+<!-- ===== ГАЛЕРЕЯ ===== -->
+<section class="section" id="gallery">
+  <h2 class="section__title">Портфолио</h2>
+  <p class="section__subtitle">Избранные работы</p>
+  <div class="gallery">
+     <a href="images/favicon 3" class="gallery__item" data-lightbox>
+      <img src="images/favicon 3" alt="Работа 1" loading="lazy">
+    </a>
+    <a href="images/favicon 5" class="gallery__item" data-lightbox>
+      <img src="images/favicon 5" alt="Работа 2" loading="lazy">
+    </a>
+    <a href="images/favicon 4" class="gallery__item" data-lightbox>
+      <img src="images/favicon 4" alt="Работа 3" loading="lazy">
+    </a>
+    <a href="images/images 4" class="gallery__item" data-lightbox>
+      <img src="images/images 4" alt="Работа 4" loading="lazy">
+    </a>
+    <a href="images/images 1" class="gallery__item" data-lightbox>
+      <img src="images/images 1" alt="Работа 5" loading="lazy">
+    </a>
+    <a href="images/images 5" class="gallery__item" data-lightbox>
+      <img src="images/images 5" alt="Работа 6" loading="lazy">
+    </a>
+  </div>
+</section>
+
+<!-- ===== О СЕБЕ ===== -->
+<section class="section about" id="about">
+  <div class="about__img">
+    <img src="images/image-16" alt="О себе">
+  </div>
+  <div class="about__text">
+    <h2 class="section__title">О себе</h2>
+    <p>Привет! Я фотограф, снимаю портреты, свадьбы и люблю ловить естественные эмоции. Работаю в естественном свете, создаю живые и тёплые кадры.</p>
+    <p>Опыт более 5 лет, более 100 съёмок. Помогу раскрепоститься перед камерой и проведу съёмку легко и комфортно.</p>
+    <a href="#contacts" class="btn btn--outline">Связаться</a>
+  </div>
+</section>
+
+<!-- ===== КОНТАКТЫ ===== -->
+<section class="section contacts" id="contacts">
+  <h2 class="section__title">Связаться</h2>
+  <p class="section__subtitle">Напишите — отвечу в течение дня</p>
+  <div class="contacts__links">
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+    <a href="https://t.me/" target="_blank">Telegram</a>
+    <a href="https://wa.me/79990000000" target="_blank">WhatsApp</a>
+    <a href="mailto:mail@example.com">E-mail</a>
+  </div>
+  <p class="contacts__phone">+7 (928) 123-45-67</p>
+</section>
+
+<!-- ===== ПОДВАЛ ===== -->
+<footer class="footer">
+  <p>© 2026 · Байкулова Арина · Все права защищены</p>
+</footer>
+
+<!-- ===== ЛАЙТБОКС ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lbClose">×</button>
+  <button class="lightbox__prev" id="lbPrev">‹</button>
+  <img src="" alt="" class="lightbox__img" id="lbImg">
+  <button class="lightbox__next" id="lbNext">›</button>
+</div>
+
+<script>
+// ===== МОБИЛЬНОЕ МЕНЮ =====
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav');
+
+burger.addEventListener('click', () => {
+  burger.classList.toggle('active');
+  nav.classList.toggle('active');
+});
+
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    burger.classList.remove('active');
+    nav.classList.remove('active');
+  });
+});
+
+// ===== ЛАЙТБОКС =====
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbClose = document.getElementById('lbClose');
+const lbPrev = document.getElementById('lbPrev');
+const lbNext = document.getElementById('lbNext');
+
+const items = Array.from(document.querySelectorAll('[data-lightbox]'));
+let current = 0;
+
+function openLightbox(index) {
+  current = index;
+  lbImg.src = items[current].getAttribute('href');
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function showNext() {
+  current = (current + 1) % items.length;
+  lbImg.src = items[current].getAttribute('href');
+}
+
+function showPrev() {
+  current = (current - 1 + items.length) % items.length;
+  lbImg.src = items[current].getAttribute('href');
+}
+
+items.forEach((item, i) => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    openLightbox(i);
+  });
+});
+
+lbClose.addEventListener('click', closeLightbox);
+lbNext.addEventListener('click', showNext);
+lbPrev.addEventListener('click', showPrev);
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') showNext();
+  if (e.key === 'ArrowLeft') showPrev();
+});
+</script>
+
+</body>
+</html>
