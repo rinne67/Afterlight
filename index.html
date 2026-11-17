@@ -11,11 +11,11 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #DCCFC0;
-  --bg-2: #c6bbad;
-  --text: #635549;
-  --muted: #6a6055;
-  --accent: #664e42;
+  --bg: #e5d5c3;
+  --bg-2: #cfc2b1;
+  --text: #544e47;
+  --muted: #3a291d;
+  --accent: #bfaf9c;
   --line: #4d362f;
 }
 
@@ -41,7 +41,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
-  background: rgba(146, 137, 118, 0.7);
+  background: rgba(198, 182, 159, 0.7);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -51,6 +51,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 20px;
   letter-spacing: 2px;
   font-weight: 500;
+  color: #171313;
 }
 .logo span { color: var(--accent); }
 
@@ -119,6 +120,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 0.95;
   letter-spacing: 2px;
   margin-bottom: 40px;
+  color:#bfaf9c
 
 }
 
@@ -132,17 +134,17 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   transition: 0.3s;
 }
-.btn:hover { background: var(--accent); color: var(--bg); }
+.btn:hover { background: var(--accent); color: #171313; }
 
 .btn--outline {
-  border-color: var(--line);
-  color: var(--text);
+  border-color: 1px solid #070402;
+  color: #333333;
   margin-top: 10px;
 }
 .btn--outline:hover {
-  border-color: var(--accent);
-  background: transparent;
-  color: var(--accent);
+  border-color: #453c2b;
+  background: #5f4f47;
+  color:#bea492;
 }
 
 .hero__scroll {
@@ -367,7 +369,7 @@ a { color: inherit; text-decoration: none; }
 
 <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
 <section class="hero">
-  <div class="hero__bg" style="background-image:url('https://picsum.photos/id/1015/1920/1080')"></div>
+  <div class="hero__bg" style="background-image:url('images/in')"></div>
   <div class="hero__content">
     <p class="hero__subtitle">Фотограф · Портрет · Свадьбы</p>
     <h1 
